@@ -1,14 +1,14 @@
-import {View,Text,StyleSheet,TextInput,Image,SafeAreaView,TouchableOpacity} from "react-native"
+import {Text,StatusBar,View,StyleSheet,TouchableOpacity,Button,Image,SafeAreaView} from "react-native"
 import React,{useState} from "react"
-const backImage=require("../../assets")
+const backImage=require("../../assets/")
 
-
-const SignIn=()=>{
+const SignUp=({navigation})=>{
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
+    const [indexNumber,setIndexNumber]=useState("")
 
-    const handleSignIn=()=>{
-        // handle user signin
+    const handleSignUp=()=>{
+        console.log("handle sign up function")
     }
     return(
         <View style={styles.container}>
@@ -26,6 +26,18 @@ const SignIn=()=>{
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
+
+        <TextInput 
+        style={styles.input}
+        placeholder="Enter index number.."
+        autoCapitalize="none"
+        keyboardType="index-number"
+        textContentType="IndexNumber"
+        autoFocus={true}
+        value={indexNumber}
+        onChangeText={(text) => setIndexNumber(text)}
+        
+        />
         <TextInput
           style={styles.input}
           placeholder="Enter password"
@@ -36,13 +48,13 @@ const SignIn=()=>{
           value={password}
           onChangeText={(text) => setPassword(text)}
         />
-        <TouchableOpacity style={styles.button} onPress={handleSignIn}>
-          <Text style={{fontWeight: 'bold', color: '#fff', fontSize: 18}}> Sign In</Text>
+        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+          <Text style={{fontWeight: 'bold', color: '#fff', fontSize: 18}}> Sign Up</Text>
         </TouchableOpacity>
         <View style={{marginTop: 20, flexDirection: 'row', alignItems: 'center', alignSelf: 'center'}}>
-          <Text style={{color: 'gray', fontWeight: '600', fontSize: 14}}>Don't have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
-            <Text style={{color: '#f57c00', fontWeight: '600', fontSize: 14}}>sign up here..</Text>
+          <Text style={{color: 'gray', fontWeight: '600', fontSize: 14}}>Already have an account? </Text>
+          <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
+            <Text style={{color: '#f57c00', fontWeight: '600', fontSize: 14}}> Sign In Here..</Text>
           </TouchableOpacity>
         </View>
         </SafeAreaView>
@@ -50,7 +62,9 @@ const SignIn=()=>{
       </View>
     )
 }
-export default SignIn;
+
+export default SignUp;
+
 const styles=StyleSheet.create({
     container: {
         flex: 1,
