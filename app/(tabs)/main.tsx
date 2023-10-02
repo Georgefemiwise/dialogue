@@ -1,14 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function index() {
+export default function main() {
   return (
 	<View>
-	  <Text>index</Text>
-	  <Text>index</Text>
-	  <Text>index</Text>
-	  <Text>index</Text>
-	  <Text>index</Text>
+	  <Text>main</Text>
 	</View>
   )
 }

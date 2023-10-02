@@ -101,4 +101,4 @@ We will actively gather feedback from users to make iterative improvements and e
 
 The **dialogue** app is here to transform your academic journey by blending the familiarity and excitement of social media with the demands of academic life. This unique combination will cultivate a lively academic community, encouraging collaboration, learning, and personal development. -->
 
-          
+          ![Alt text](image.png)
