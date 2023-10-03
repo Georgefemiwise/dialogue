@@ -3,31 +3,21 @@ import React from 'react';
 import { View, Text } from '../components/Themed';
 import { Feather } from '@expo/vector-icons';
 import Button from '../components/Button';
+import { Link } from 'expo-router';
 
 export default function welcomePage() {
 	return (
 		<View style={styles.container}>
-			<Feather name='user' size={80} color='inherit' />
+			<Feather name='box' size={80} color='b' />
 			<Text style={styles.heading}>Welcome to dialogue</Text>
 			<Text style={styles.subheading}>
 				Student go to app for academic performance.
 			</Text>
 
 			<View style={styles.btnGroup}>
-				<Button
-					style='primary'
-					title='login'
-					onPress={() => {
-						console.log('login');
-					}}
-				/>
-				<Button
-					style='info'
-					title='register'
-					onPress={() => {
-						console.log('redister');
-					}}
-				/>
+				<Link href='/login' asChild>
+					<View style={styles.btn}>get started</View>
+				</Link>
 			</View>
 		</View>
 	);
@@ -45,11 +35,14 @@ const styles = StyleSheet.create({
 	btn: {
 		textTransform: 'capitalize',
 		justifyContent: 'center',
-		paddingHorizontal: 10,
-		padding: 5,
+		paddingHorizontal: 20,
+		padding: 8,
+		backgroundColor: '#500591',
+		color: "#fff",
+		borderRadius:4
 	},
 	btnGroup: {
-		display: 'flex',
+		flexDirection: 'row',
 		width: '40%',
 		justifyContent: 'space-evenly',
 		marginTop: 15,
