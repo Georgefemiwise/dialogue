@@ -45,8 +45,8 @@ The goal of **dialogue** is to bridge the gap between social interaction and aca
 We will follow an Agile development methodology, working in sprints of two weeks. Key phases include:
 
 -   Requirements gathering ✅
--   Design ...
--   Development
+-   Design ... inprogress
+-   Development ... inprogress
 -   Testing
 -   Deployment
 
