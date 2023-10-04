@@ -1,42 +1,80 @@
-import { View, Text } from 'react-native';
-import React from 'react';
-import { Tabs } from 'expo-router';
-import { Feather } from '@expo/vector-icons';
+import Feather from '@expo/vector-icons/Feather';
+import { Link, Tabs } from 'expo-router';
+import { Pressable, useColorScheme } from 'react-native';
 
-export default () => {
-	return (
-		<Tabs>
+import Colors from '../../constants/Colors';
+
+/**
+ * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
+ */
+function TabBarIcon(props: {
+  name: React.ComponentProps<typeof Feather>['name'];
+  color: string;
+}) {
+  return <Feather size={28} style={{ marginBottom: -3 }} {...props} />;
+}
+
+export default function TabLayout() {
+  const colorScheme = useColorScheme();
+
+  return (
+		<Tabs
+			screenOptions={{
+				tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+			}}>
+		
 			<Tabs.Screen
-				name='home'
+				name='index'
 				options={{
-					tabBarLabel: 'Home',
-					headerTitle: 'home screen',
-					tabBarIcon: ({ color, size }) => (
-						<Feather name='home' />
+					title: 'Feed',
+					tabBarIcon: ({ color }) => (
+						<TabBarIcon name='home' color={color} />
+					),
+					headerRight: () => (
+						<Link href='/modal' asChild>
+							<Pressable>
+								{({ pressed }) => (
+									<Feather
+										name='feather'
+										size={25}
+										color={
+											Colors[
+												colorScheme ??
+													'light'
+											].text
+										}
+										style={{
+											marginRight: 15,
+											opacity: pressed
+												? 0.5
+												: 1,
+										}}
+									/>
+								)}
+							</Pressable>
+						</Link>
+					),
+				}}
+			/>
+			<Tabs.Screen
+				name='chat'
+				options={{
+					title: '',
+					tabBarIcon: ({ color }) => (
+						<TabBarIcon name='box' color={color} />
 					),
 				}}
 			/>
 			<Tabs.Screen
 				name='profile'
 				options={{
-					tabBarLabel: 'Account',
-					headerTitle: 'my Account',
-					tabBarIcon: ({ color, size }) => (
-						<Feather name='user' />
+					title: 'profile',
+					tabBarIcon: ({ color }) => (
+						<TabBarIcon name='user' color={color} />
 					),
 				}}
 			/>
-			<Tabs.Screen
-				name='list'
-				options={{
-					tabBarLabel: 'feed',
-					headerTitle: 'feed',
-					// headerShown: false,
-					tabBarIcon: ({ color, size }) => (
-						<Feather name='message-square' />
-					),
-				}}
-			/>
+		
 		</Tabs>
-	);
-};
+  );
+}
