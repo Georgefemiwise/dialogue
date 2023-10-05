@@ -35,8 +35,8 @@ export default function TabLayout() {
 							<Pressable>
 								{({ pressed }) => (
 									<Feather
-										name='feather'
-										size={25}
+										name='bell'
+										size={20}
 										color={
 											Colors[
 												colorScheme ??
@@ -59,7 +59,7 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name='chat'
 				options={{
-					title: '',
+					title: 'box',
 					tabBarIcon: ({ color }) => (
 						<TabBarIcon name='box' color={color} />
 					),
@@ -67,7 +67,7 @@ export default function TabLayout() {
 			/>
 			<Tabs.Screen
 				name='profile'
-				options={{
+				options={{headerShown:false,
 					title: 'profile',
 					tabBarIcon: ({ color }) => (
 						<TabBarIcon name='user' color={color} />

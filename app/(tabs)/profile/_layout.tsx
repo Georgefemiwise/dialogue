@@ -8,12 +8,18 @@ export default function AuthLayout() {
 			<Stack.Screen
 				name='index'
 				options={{
-					// headerShown: false,
+					title: 'Profile',
 					headerRight: () => (
 						<Link href='/profile/settings'>
 							<Text>register</Text>
 						</Link>
 					),
+				}}
+			/>
+			<Stack.Screen
+				name='settings'
+				options={{
+					title: 'Settings',
 				}}
 			/>
 		</Stack>
