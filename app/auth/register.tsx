@@ -5,6 +5,7 @@ import {
 
 	createUserWithEmailAndPassword,
 } from '@firebase/auth';
+import { authStyles } from './style';
 
 interface RgistrationForm {}
 
@@ -47,17 +48,17 @@ export default function RgistrationForm(props: RgistrationForm) {
 	};
 
 	return (
-		<View style={styles.container}>
-			<Text style={styles.header}>LoginForm</Text>
+		<View style={authStyles.container}>
+			<Text style={authStyles.header}>LoginForm</Text>
 
 			<TextInput
-				style={styles.input}
+				style={authStyles.input}
 				placeholder='Email'
 				value={state.email}
 				onChangeText={handleEmailChange}
 			/>
 			<TextInput
-				style={styles.input}
+				style={authStyles.input}
 				placeholder='Password'
 				secureTextEntry={true}
 				value={state.password}
@@ -69,21 +70,3 @@ export default function RgistrationForm(props: RgistrationForm) {
 	);
 }
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		paddingHorizontal: 20,
-	},
-	header: {
-		fontSize: 24,
-		marginBottom: 20,
-	},
-	input: {
-		height: 40,
-		borderColor: 'gray',
-		borderWidth: 1,
-		marginBottom: 10,
-		padding: 10,
-	},
-});
