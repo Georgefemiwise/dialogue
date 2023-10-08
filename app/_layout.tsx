@@ -8,8 +8,8 @@ export default function StackLayout() {
     <PaperProvider>
     <Stack>
       <Stack.Screen name="(auth)/onboarding" options={{ headerShown: false }} />
-      <Stack.Screen name="(auth)/login" options={{ title: "" }} />
-      <Stack.Screen name="(auth)/register" options={{ title: "" }} />
+      <Stack.Screen name="(auth)/login" options={{ headerShown: false,  }} />
+      <Stack.Screen name="(auth)/register" options={{ headerShown: false }} />
     </Stack>
     </PaperProvider>
   )

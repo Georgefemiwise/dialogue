@@ -1,7 +1,8 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native'
 import React from 'react'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import { authStyles } from './style'
+import Button from '../../components/Button'
 
 export default function Onboarding() {
   return (
@@ -14,35 +15,20 @@ export default function Onboarding() {
         }}
       >
         <Text style={{ ...authStyles.header, marginBottom: 0 }}>Welcome</Text>
-        <Text style={{ textAlign: 'center' , marginBottom:5}}>
+        <Text style={{ textAlign: 'center', marginBottom: 5 }}>
           Our mission is all about making life in school a little better, join
           us
         </Text>
       </View>
 
       <View>
-        <Link href="/login" asChild>
-          <Pressable>
-            <Text
-              style={{
-                ...styles.btn,
-                backgroundColor: 'purple',
-                color: 'white',
-              }}
-            >
-              Login
-            </Text>
-          </Pressable>
-        </Link>
-        <Link href="/register" asChild>
-          <Pressable>
-            <Text
-              style={{ ...styles.btn, borderWidth: 0.2, backgroundColor: '#b1ff45' }}
-            >
-              Register
-            </Text>
-          </Pressable>
-        </Link>
+        <Button title="Login" handlePress={() => router.push('/login')} />
+
+        <Button
+          title="Register"
+          mode="contained"
+          handlePress={() => router.push('/register')}
+        />
       </View>
     </View>
   )

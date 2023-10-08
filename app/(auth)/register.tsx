@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-import { Text, TextInput, View, Button } from 'react-native'
+import { Text, View } from 'react-native'
 import { FIREBASE_AUTH } from '../../core/api/firebase/config'
 import { createUserWithEmailAndPassword } from '@firebase/auth'
 import { authStyles } from './style'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
+import Logo from '../../components/Logo'
+import TextInput from '../../components/TextInputs'
+import Button from '../../components/Button'
 
 interface RgistrationForm {}
 
@@ -37,6 +40,7 @@ export default function RgistrationForm(props: RgistrationForm) {
         password
       )
       console.log(response)
+      router.replace('/login')
     } catch (error) {
       console.log(error)
     }
@@ -47,34 +51,46 @@ export default function RgistrationForm(props: RgistrationForm) {
 
   return (
     <View style={authStyles.container}>
-      
-      <Text style={{ ...authStyles.header, fontSize: 28 }}>
-        Create an account
-      </Text>
+      <View
+        style={{
+          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingBottom: 30,
+        }}
+      >
+        <Logo />
+        <Text style={{ ...authStyles.header, marginBottom: 0, fontSize: 28 }}>
+          Create account
+        </Text>
+      </View>
       <TextInput
-        style={authStyles.input}
-        placeholder="Email"
         value={state.email}
+        returnKeyType="next"
+        label="Email"
         onChangeText={handleEmailChange}
+        autoCapitalize="none"
+        autoCompleteType="email"
+        textContentType="emailAddress"
+        keyboardType="email-address"
       />
+
       <TextInput
-        style={authStyles.input}
-        placeholder="Password"
-        secureTextEntry={true}
         value={state.password}
+        returnKeyType="next"
+        label="Password"
         onChangeText={handlePasswordChange}
+        autoCapitalize="none"
+        autoCompleteType="password"
+        textContentType="password"
+        keyboardType="password"
+        inputType="numeric"
       />
-      <TextInput
-        id="password2"
-        style={authStyles.input}
-        placeholder="Confirm Password"
-        secureTextEntry={true}
-        value={state.password}
-        onChangeText={handlePasswordChange}
-      />
-      <Button color="purple" title="Submit" onPress={handleSubmit} />
-      <Text>
-        Have an acccount?{' '}
+
+      <Button mode="elevated" handlePress={handleSubmit} title="Submit" />
+
+      <Text style={{ marginVertical: 10 }}>
+        I don't have an acccount?{' '}
         <Link style={{ color: 'blue', marginTop: 10 }} href="/login">
           Login
         </Link>

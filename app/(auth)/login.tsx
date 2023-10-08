@@ -1,45 +1,82 @@
 import React, { useState } from 'react'
-import { StyleSheet, TextInput, Button, View, Text, Image } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import { FIREBASE_AUTH } from '../../core/api/firebase/config'
 import { signInWithEmailAndPassword } from '@firebase/auth'
 import { Link } from 'expo-router'
 import { authStyles } from './style'
-import { FontAwesome5 } from '@expo/vector-icons'
+import Logo from '../../components/Logo'
+import { MaterialIcons } from '@expo/vector-icons'
+import TextInput from '../../components/TextInputs'
+import Button from '../../components/Button'
 
-interface LoginFormProps {}
-
-interface LoginFormState {
+interface Credentials {
   email: string
   password: string
 }
 
-export default function LoginForm(props: LoginFormProps) {
-  const [state, setState] = useState<LoginFormState>({
-    email: '',
-    password: '',
-  })
+const initialCredentials: Credentials = {
+  email: '',
+  password: '',
+}
 
-  const handleEmailChange = (text: string) => {
-    setState({ ...state, email: text })
-  }
+export default function LoginForm() {
+  const [credentials, setCredentials] =
+    useState<Credentials>(initialCredentials)
+  const [error, setError] = useState(null)
 
-  const handlePasswordChange = (text: string) => {
-    setState({ ...state, password: text })
+  // update input fields for email
+  const updateEmail = (text: string) => {
+    setCredentials((prevCredentials) => ({
+      ...prevCredentials,
+      email: text,
+    }))
   }
+  // update input fields for password
+  const updatePassword = (text: string, error: string) => {
+    setCredentials((prevCredentials) => ({
+      ...prevCredentials,
+      password: text,
+    }))
+  }
+  // Accessing email and password
+  const { email, password } = credentials
 
   const handleSubmit = async () => {
-    const { email, password } = state
     const auth = FIREBASE_AUTH
-
     try {
       const response = await signInWithEmailAndPassword(auth, email, password)
-      console.log(response)
-    } catch (error) {
-      console.log(error)
-    }
 
-    // Clear the form after submission
-    setState({ email: '', password: '' })
+      console.log(response)
+    } catch (error: any) {
+      // If it's a Firebase error, try to extract the specific error message
+      if (error.message === 'auth/invalid-email') {
+        console.log('Invalid email address.')
+      } else if (error.message === 'auth/user-not-found') {
+        console.log('User not found.')
+      } else if (error.message === 'auth/wrong-password') {
+        console.log('Invalid password.')
+      } else {
+        // If it's not a known Firebase error, display the custom error message
+        console.log('errorMessage')
+      }
+      // try {
+      //   const response = await signInWithEmailAndPassword(auth, email, password)
+      //   console.log(response.user)
+      // } catch (error: any) {
+      //   const errorCode = error.code
+      //   const errorMessage = error.message
+      //   console.log(errorMessage)
+
+      //   // console.log(error)
+      //   // setError(error.error.message)
+      // }
+
+      // Clear the form after submission
+      setCredentials({
+        email: '',
+        password: '',
+      })
+    }
   }
 
   return (
@@ -52,30 +89,51 @@ export default function LoginForm(props: LoginFormProps) {
           paddingBottom: 30,
         }}
       >
+        <Logo />
         <Text style={{ ...authStyles.header, marginBottom: 0, fontSize: 28 }}>
-          Login your account
+          Login
         </Text>
       </View>
+      {/* <Text
+        style={{
+          color: 'red',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <MaterialIcons
+          name="error"
+          style={{ paddingRight: 5 }}
+          size={20}
+          color="red"
+        />
+        {error}
+      </Text> */}
       <TextInput
-        style={authStyles.input}
-        placeholder="Email"
-        value={state.email}
-        onChangeText={handleEmailChange}
+        value={email}
+        returnKeyType="next"
+        label="Email"
+        onChangeText={updateEmail}
+        autoCapitalize="none"
+        autoCompleteType="email"
+        textContentType="emailAddress"
+        keyboardType="email-address"
       />
+
       <TextInput
-        style={authStyles.input}
-        placeholder="Password"
+        label="Password"
+        returnKeyType="next"
+        value={password}
+        onChangeText={updatePassword}
         secureTextEntry={true}
-        value={state.password}
-        onChangeText={handlePasswordChange}
       />
       <Text style={styles.forgotPassword}>
         <Link href="/register">Forgot password</Link>
       </Text>
 
-      <Button color="purple" title="Submit" onPress={handleSubmit} />
+      <Button mode="elevated" handlePress={handleSubmit} title="Submit" />
 
-      <Text style={{  marginVertical: 10 }}>
+      <Text style={{ marginVertical: 10 }}>
         I don't have an acccount?{' '}
         <Link style={{ color: 'blue', marginTop: 10 }} href="/register">
           Register
@@ -85,5 +143,9 @@ export default function LoginForm(props: LoginFormProps) {
   )
 }
 const styles = StyleSheet.create({
-  forgotPassword: { color: '#aaa', width: '100%', textAlign: 'right' },
+  forgotPassword: {
+    color: '#aaa',
+    width: '100%',
+    textAlign: 'right'
+  },
 })

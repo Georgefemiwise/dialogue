@@ -1,5 +1,10 @@
 import { Redirect } from 'expo-router'
+import {AuthProvider} from '../core/context/Authcontext'
 
 export default function StartPage() {
-  return <Redirect href="/(auth)/onboarding" />
+  return (
+    <AuthProvider>
+      <Redirect href="/(auth)/onboarding" />
+    </AuthProvider>
+  )
 }
