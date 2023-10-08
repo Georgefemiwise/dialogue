@@ -7,8 +7,14 @@ export const authStyles = StyleSheet.create({
 		paddingHorizontal: 20,
 	},
 	header: {
-		fontSize: 24,
+		fontSize: 40,
 		marginBottom: 20,
+		fontWeight: "700",
+		// color:'purple',
+	},
+	subheader: {
+		fontSize: 18,
+		fontWeight:'500'
 	},
 	input: {
 		height: 40,
@@ -17,6 +23,6 @@ export const authStyles = StyleSheet.create({
 		marginBottom: 10,
 		padding: 10,
 		borderRadius: 4,
-		backgroundColor:"#ccffff"
+		backgroundColor:"#ccc"
 	},
 });
