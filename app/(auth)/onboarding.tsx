@@ -1,10 +1,11 @@
-import { View, Text, Pressable, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
-import { Link, router } from 'expo-router'
+import { router } from 'expo-router'
 import { authStyles } from './style'
 import Button from '../../components/Button'
 
 export default function Onboarding() {
+	
   return (
     <View style={authStyles.container}>
       <View
@@ -33,13 +34,3 @@ export default function Onboarding() {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  btn: {
-    padding: 15,
-    marginVertical: 5,
-    borderRadius: 4,
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-})
