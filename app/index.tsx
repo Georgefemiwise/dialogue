@@ -1,10 +1,7 @@
-import { Redirect } from 'expo-router'
-import {AuthProvider} from '../core/context/Authcontext'
+import { View } from 'react-native'
 
-export default function StartPage() {
-  return (
-    <AuthProvider>
-      <Redirect href="/(auth)/onboarding" />
-    </AuthProvider>
-  )
+const StartPage = () => {
+    return <View />
 }
+
+export default StartPage
