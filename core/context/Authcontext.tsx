@@ -2,6 +2,12 @@ import React, { useEffect, useState, createContext } from 'react'
 import { FIREBASE_AUTH } from '../api/firebase/config'
 import { User, onAuthStateChanged } from 'firebase/auth'
 
+import {
+    setPersistence,
+    signInWithEmailAndPassword,
+    browserSessionPersistence,
+} from 'firebase/auth'
+
 interface AuthProps {
     user?: User | null
     initialized: boolean
@@ -32,10 +38,11 @@ export function AuthProvider({ children }: any) {
     }, [])
 
     const signIn = async (email: string, password: string) => {
+        setPersistence(FIREBASE_AUTH, browserSessionPersistence)
         try {
             // Implement Firebase sign-in logic here (using email and password)
             // Example:
-            // await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
+            await signInWithEmailAndPassword(FIREBASE_AUTH, email, password)
         } catch (error) {
             // console.error('Sign-in error:', error.message)
             // Handle sign-in error (e.g., show an error message)

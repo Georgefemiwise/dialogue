@@ -8,7 +8,8 @@ export default function TabOneScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>home</Text>
       <Text style={styles.title}>
-        <Link href="/(auth)/login">goto login page</Link>
+        <Link href="/(auth)/logout">goto log out page</Link>
+        {/* <Text>{ user.user}</Text> */}
       </Text>
     </View>
   )
