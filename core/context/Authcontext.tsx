@@ -53,7 +53,7 @@ export function AuthProvider({ children }: any) {
         try {
             // Implement Firebase sign-out logic here
             // Example:
-            // await signOut(FIREBASE_AUTH);
+            await signOut();
         } catch (error) {
             // console.error('Sign-out error:', error.message)
             // Handle sign-out error (e.g., show an error message)

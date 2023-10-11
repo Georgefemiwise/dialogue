@@ -6,6 +6,7 @@ export default function Logo() {
     <Image
       source={require('../assets/images/dialogue-favicon---black.png')}
       style={styles.image}
+      
     />
   )
 }

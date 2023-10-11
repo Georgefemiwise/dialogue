@@ -1,22 +1,12 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 
-import EditScreenInfo from '../../components/EditScreenInfo'
-import { Text, View } from '../../components/Themed'
-
-export default function TabTwoScreen() {
+export default function chat() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
+    <View>
+      <Text>chat</Text>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-})
+const styles = StyleSheet.create({})

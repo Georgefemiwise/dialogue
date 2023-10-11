@@ -1,18 +1,3 @@
-import { PaperProvider } from 'react-native-paper'
-import { AppRegistry } from 'react-native'
-
-// export default function StackLayout() {
-//   return (
-//     <PaperProvider>
-//     <Stack>
-//       <Stack.Screen name="(auth)/onboarding" options={{ headerShown: false }} />
-//       <Stack.Screen name="(auth)/login" options={{ headerShown: false,  }} />
-//       <Stack.Screen name="(auth)/register" options={{ headerShown: false }} />
-//     </Stack>
-//     </PaperProvider>
-//   )
-// }
-// AppRegistry.registerComponent(appName, () => StackLayout)
 
 import { Slot, useRouter, useSegments, SplashScreen } from 'expo-router'
 import { useContext, useEffect } from 'react'
@@ -20,8 +5,6 @@ import { Text } from 'react-native'
 import { AuthContext, AuthProvider } from '../core/context/Authcontext'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useFonts } from 'expo-font'
-
-
 
 
 
