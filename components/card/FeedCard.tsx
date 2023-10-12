@@ -11,8 +11,6 @@ interface FeedProps {
 }
 
 export default function FeedCard({ user, content, time }: FeedProps) {
-  
-
     return (
         <View style={styles.container}>
             <View
@@ -51,9 +49,9 @@ export default function FeedCard({ user, content, time }: FeedProps) {
                 <Text style={styles.body}>{content}</Text>
             </View>
             <View style={styles.actions}>
-                <SomeButton name='like' icon='heart'/>
-                <SomeButton name='comment' icon='chat'/>
-                <SomeButton name='share' icon='share'/>
+                <SomeButton name="like" icon="heart" />
+                <SomeButton name="comment" icon="chat" />
+                <SomeButton name="share" icon="share" />
             </View>
         </View>
     )
@@ -66,7 +64,7 @@ const styles = StyleSheet.create({
         margin: 5,
         paddingVertical: 15,
         borderRadius: 7,
-        opacity:0.9
+        opacity: 0.9,
     },
     body: { color: mytheme.neutral },
     actions: {

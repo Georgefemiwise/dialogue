@@ -1,12 +1,9 @@
-
 import { Slot, useRouter, useSegments, SplashScreen } from 'expo-router'
 import { useContext, useEffect } from 'react'
 import { Text } from 'react-native'
 import { AuthContext, AuthProvider } from '../core/context/Authcontext'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useFonts } from 'expo-font'
-
-
 
 // =========================================
 export const unstable_settings = {
@@ -32,7 +29,6 @@ const InitialLayout = () => {
         if (error) throw error
     }, [error])
 
-    
     useEffect(() => {
         if (!initialized) return
 
@@ -46,7 +42,23 @@ const InitialLayout = () => {
     }, [user, initialized])
 
     // todo make better loding component
-    return <>{initialized ? <Slot /> : <Text>Loading...</Text>}</>
+    return (
+        <>
+            {initialized ? (
+                <Slot />
+            ) : (
+                <Text
+                    style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    Loading...
+                </Text>
+            )}
+        </>
+    )
 }
 
 const RootLayoutNav = () => {
