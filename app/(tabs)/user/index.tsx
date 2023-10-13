@@ -3,16 +3,17 @@ import React from 'react'
 import { ExternalLink } from '../../../components/ExternalLink'
 import { Text, View } from 'react-native'
 import { Link } from 'expo-router'
+import CustomList from '../../../components/List'
 
 export default function ProflePage() {
-  return (
-    <View>
-      <Text>ProflePage</Text>
-      <Text>
-        <Link href="/(tabs)/">back</Link>
-      </Text>
-    </View>
-  )
+    return (
+        <View>
+          
+            <CustomList href="/(tabs)/user/profile" name='person' title="Profile" />
+            <CustomList href="/(tabs)/user/settings" name="settings" title="Settings" />
+            <CustomList href="/(auth)/logout" name="logout" title="Logout" />
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({})

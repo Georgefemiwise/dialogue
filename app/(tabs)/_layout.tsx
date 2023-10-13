@@ -1,26 +1,20 @@
-import Entypo from '@expo/vector-icons/Entypo'
+import MaterialIcon from '@expo/vector-icons/MaterialIcons'
 import { Link, Tabs } from 'expo-router'
 import { Pressable, useColorScheme } from 'react-native'
-
-
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-    name: React.ComponentProps<typeof Entypo>['name']
+    name: React.ComponentProps<typeof MaterialIcon>['name']
     color: string
 }) {
-    return <Entypo size={28} style={{ marginBottom: -3 }} {...props} />
+    return <MaterialIcon size={28} style={{ marginBottom: -3 }} {...props} />
 }
 
 export default function TabLayout() {
     return (
-        <Tabs
-            screenOptions={{
-                headerTintColor: '#888',
-            }}
-        >
+        <Tabs>
             <Tabs.Screen
                 name="index"
                 options={{
@@ -30,11 +24,11 @@ export default function TabLayout() {
                         <TabBarIcon name="home" color={color} />
                     ),
                     headerRight: () => (
-                        <Link href="/profile/settings" asChild>
+                        <Link href="/(tabs)/user" asChild>
                             <Pressable>
                                 {({ pressed }) => (
-                                    <Entypo
-                                        name="dots-three-vertical"
+                                    <MaterialIcon
+                                        name="menu"
                                         size={20}
                                         style={{
                                             marginRight: 15,
@@ -50,6 +44,7 @@ export default function TabLayout() {
             <Tabs.Screen
                 name="chat"
                 options={{
+                    headerShown: false,
                     title: 'chat',
                     tabBarLabel: '',
 
@@ -59,16 +54,37 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="profile"
+                name="tasks"
                 options={{
                     headerShown: false,
 
                     tabBarLabel: '',
                     tabBarIcon: ({ color }) => (
-                        <TabBarIcon name="user" color={color} />
+                        <TabBarIcon name="flag" color={color} />
                     ),
                 }}
             />
+            <Tabs.Screen
+                name="user"
+                options={{
+                    href: '/(tabs)/user',
+                    headerShown: false,
+
+                    tabBarLabel: '',
+                    tabBarIcon: ({ color }) => (
+                        <TabBarIcon name="person" color={color} />
+                    ),
+                }}
+            />
+            {/* 
+            <Tabs.Screen
+                // Name of the route to hide.
+                name="tasks"
+                options={{
+                    // This tab will no longer show up in the tab bar.
+                    href: null,
+                }}
+            /> */}
         </Tabs>
     )
 }

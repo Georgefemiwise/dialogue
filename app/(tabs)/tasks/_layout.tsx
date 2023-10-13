@@ -1,7 +1,7 @@
 import React from 'react'
 import { Stack } from 'expo-router'
 
-export default function UserLayout() {
+export default function TaskLayout() {
     return (
         <Stack>
             <Stack.Screen
@@ -9,8 +9,7 @@ export default function UserLayout() {
                 options={{
                     title: 'Profile',
                 }}
-            /> 
-          
+            />
         </Stack>
     )
 }

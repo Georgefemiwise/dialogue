@@ -5,11 +5,11 @@ export default function UserLayout() {
     return (
         <Stack>
             <Stack.Screen
-                name="index"
+                name="chat"
                 options={{
-                    title: 'Profile',
+                    title: 'chat',
                 }}
-            /> 
+            />
           
         </Stack>
     )
