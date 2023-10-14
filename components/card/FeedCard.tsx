@@ -1,16 +1,17 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
 import React from 'react'
 import Entypo from '@expo/vector-icons/MaterialIcons'
-import SomeButton from './ActionButton'
+import ActionButton from './ActionButton'
 import { mytheme } from '../../constants/Colors'
 
 interface FeedProps {
     user: string
     content: string
     time?: any
+    hasImage?:boolean
 }
 
-export default function FeedCard({ user, content, time }: FeedProps) {
+export default function FeedCard({ user, content, time, hasImage }: FeedProps) {
     return (
         <View style={styles.container}>
             <View
@@ -23,8 +24,8 @@ export default function FeedCard({ user, content, time }: FeedProps) {
                 <Image
                     source={require('../../assets/images/dialogue-favicon---black.png')}
                     style={{
-                        width: 30,
-                        height: 30,
+                        width: 40,
+                        height: 40,
                         borderRadius: 50,
                         marginRight: 5,
                     }}
@@ -34,6 +35,7 @@ export default function FeedCard({ user, content, time }: FeedProps) {
                     <Text
                         style={{
                             textTransform: 'capitalize',
+                            fontSize:16,
                             fontWeight: 'bold',
                         }}
                     >
@@ -46,12 +48,21 @@ export default function FeedCard({ user, content, time }: FeedProps) {
             </View>
 
             <View>
+                {hasImage && (
+                    <Image
+                        source={require('../../assets/images/dialogue-favicon---black.png')}
+                    />
+                )}
+            </View>
+            <View>
                 <Text style={styles.body}>{content}</Text>
             </View>
             <View style={styles.actions}>
-                <SomeButton name="like" icon="heart" />
-                <SomeButton name="comment" icon="chat" />
-                <SomeButton name="share" icon="share" />
+                <View style={{ flexDirection: 'row' }}>
+                    <ActionButton name="like" icon="heart" />
+                    <ActionButton name="comment" icon="chat" />
+                </View>
+                <ActionButton name="share" icon="share" />
             </View>
         </View>
     )
@@ -66,7 +77,7 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         opacity: 0.9,
     },
-    body: { color: mytheme.neutral },
+    body: { color: mytheme.primary,fontSize:22 },
     actions: {
         flexDirection: 'row',
         justifyContent: 'space-between',

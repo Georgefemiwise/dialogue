@@ -6,13 +6,15 @@ import { FIREBASE_AUTH } from '../../core/api/firebase/config'
 
 export default function logout() {
     return (
-        <View>
-            <Text>are you sure you want to logot?</Text>
+        <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
+            <Text>Are you sure you want to logout?</Text>
+            <View style={{ width:"50%"}}>
             <Button
                 mode="contained"
                 title="logout"
                 handlePress={() => signOut(FIREBASE_AUTH)}
             />
+            </View>
         </View>
     )
 }
