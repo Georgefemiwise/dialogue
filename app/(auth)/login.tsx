@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { FIREBASE_AUTH } from '../../core/api/firebase/config'
 import { signInWithEmailAndPassword } from '@firebase/auth'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import { authStyles } from './style'
 import Logo from '../../components/Logo'
 import { MaterialIcons } from '@expo/vector-icons'
@@ -51,6 +51,7 @@ export default function LoginForm() {
             )
 
             console.log(response)
+             router.replace('/(tabs)/')
         } catch (error: any) {
             // If it's a Firebase error, try to extract the specific error message
             if (error.message === 'auth/invalid-email') {

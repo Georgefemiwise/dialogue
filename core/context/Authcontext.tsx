@@ -33,6 +33,7 @@ export function AuthProvider({ children }: any) {
 
         return () => {
             // Unsubscribe from the Firebase auth listener when component unmounts
+            //to avoid memory leaks 
             unsubscribe()
         }
     }, [])

@@ -3,7 +3,7 @@ import { View, Text, Image, ScrollView } from 'react-native'
 import { FIREBASE_AUTH, FIRESTORE_DB } from '../../../core/api/firebase/config'
 import { Avatar, Button, TextInput } from 'react-native-paper'
 import { useAuth } from '../../../core/context/Authcontext'
- import { collection, addDoc } from 'firebase/firestore'
+import { getDoc, setDoc, doc, getDocFromServer } from 'firebase/firestore'
 
 interface UserProfile {
     name: string
@@ -14,61 +14,58 @@ interface UserProfile {
 }
 
 const ProfileScreen = () => {
-    const profile = useAuth()
-
-    const [user, setUser] = useState<UserProfile | null>(null)
-    const [name, setName] = useState<string>('')
-    const [email, setEmail] = useState<string>(`${profile.user?.email}`)
-    const [phoneNumber, setPhoneNumber] = useState<string>('')
+    const [name, setName] = useState<any>('')
+    const [email, setEmail] = useState<any>('') // Provide a default value for email
+    const [phoneNumber, setPhoneNumber] = useState<any>()
     const [age, setAge] = useState<string>('')
-    const [profilePicURL, setProfilePicURL] = useState<string>('')
 
+    const userData = useAuth()
     useEffect(() => {
         // Load user data from Firebase when the component mounts
 
-        // const userRef = FIRESTORE_DB.collection('users').doc('your_user_id')
-        // userRef.get().then((doc: { exists: any; data: () => UserProfile }) => {
-        //     if (doc.exists) {
-        //         const userData = doc.data() as UserProfile
-        //         setUser(userData)
-        //         setName(userData.name)
-        //         setEmail(userData.email)
-        //         setPhoneNumber(userData.phoneNumber)
-        //         setAge(userData.age)
-        //         setProfilePicURL(userData.profilePicURL)
-        //     }
-        // })
+        setName(userData.user?.displayName)
+        setEmail(userData.user?.email)
+        setPhoneNumber(userData.user?.phoneNumber)
+        setAge('')
     }, [])
 
     const updateProfile = async () => {
-
         try {
-            const docRef = await addDoc(collection(FIRESTORE_DB, 'users'), {
-                first: 'Ada',
-                last: 'Lovelace',
-                born: 1815,
-            })
-            console.log('Document written with ID: ', docRef.id)
+            if (name && email && phoneNumber && age) {
+                const userDatall = useAuth()
+                // get user data ref with the user unique id (uid)
+//                 const getUserRef = doc(
+//                     FIRESTORE_DB,
+//                     'users',
+//                     `${userDatall.user?.uid}`
+//                 )
+// ``
+                // user data
+                const userData = {
+                    first: '',
+                    last: '',
+                    age: '',
+                }
+
+                // set new user data
+                // const docRef = await setDoc(getUserRef, userData)
+
+                // Clear the fields after processing
+                setName('')
+                setEmail('')
+                setPhoneNumber('')
+                setAge('')
+            } else {
+                // Handle the case where not all required fields are filled
+                console.log('Please fill in all required fields.')
+            }
         } catch (e) {
             console.error('Error adding document: ', e)
         }
     }
-
     return (
         <ScrollView>
-            {/* <Avatar.Image size={24} source={require('../assets/avatar.png')} /> */}
             <View>
-                {/* {profilePicURL && (
-                    <Image
-                        source={{ uri: profilePicURL }}
-                        style={{ width: 100, height: 100 }}
-                    />
-                )} */}
-                <View
-                    style={{ flexDirection: 'row', justifyContent: 'center' }}
-                >
-                    <Avatar.Text size={70} label="XD" />
-                </View>
                 <TextInput
                     placeholder="Name"
                     value={name}
@@ -89,14 +86,7 @@ const ProfileScreen = () => {
                     value={age}
                     onChangeText={(text) => setAge(text)}
                 />
-              
-                <Button
-                    mode="contained"
-                    style={{ borderRadius: 0 }}
-                    onPress={updateProfile}
-                >
-                    Update Profile
-                </Button>
+                <Button onPress={updateProfile}>update Profile</Button>
             </View>
         </ScrollView>
     )
